@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AppArcade.Models.Chat>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6273e11d-4ef6-4bfc-80fb-f11ae7904b1d/df9nb1w-18854242-37b0-406d-951b-915c61281cf0.png/v1/fill/w_1280,h_912,q_80,strp/city_sky_background__sailor_moon_inspired__by_mochapinku_df9nb1w-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTEyIiwicGF0aCI6IlwvZlwvNjI3M2UxMWQtNGVmNi00YmZjLTgwZmItZjExYWU3OTA0YjFkXC9kZjluYjF3LTE4ODU0MjQyLTM3YjAtNDA2ZC05NTFiLTkxNWM2MTI4MWNmMC5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.p7Xr0t65NNF72kwLh8iokcbnqQJgfzZao62vv7b54VY');
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .btn {
+        padding: 9px 30px;
+        border: none;
+        background-color: #5c0fd8;
+        color: #ffffff;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #1c1161;
+        }
+
+    .chat-container {
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 60px;
+    }
+
+    .chat-message {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .chat-message p {
+            margin: 0;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>
+<body>
+    <div class="chat-container">
+        <h3>General Support</h3>
+
+        @foreach (var item in Model)
+        {
+            <div class="chat-message">
+                <p><strong style="color:red">@Html.DisplayFor(modelItem => item.user_info.Username):</strong> @item.Message (@item.Timestamp)</p>
+            </div>
+
+        }
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <h5>Create New Message</h5>
+                <input type="text" class="form-control" id="Message" name="Message" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn" />
+            </div>
+        }
+
+    </div>
+</body>
+

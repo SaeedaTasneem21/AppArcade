@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AppArcadeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="user_info">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserLibraries" Relationship="AppArcadeModel.FK__UserLibra__USERI__02FC7413" FromRole="user_info" ToRole="UserLibrary" />
+    <NavigationProperty Name="Chats" Relationship="AppArcadeModel.FK__Chat__UserId__160F4887" FromRole="user_info" ToRole="Chat" />
+  </EntityType>
+  <EntityContainer Name="AppArcadeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="user_info" EntityType="Self.user_info" />
+    <EntitySet Name="admin_info" EntityType="AppArcadeModel.admin_info" />
+    <EntitySet Name="Product_info" EntityType="AppArcadeModel.Product_info" />
+    <EntitySet Name="UserLibraries" EntityType="AppArcadeModel.UserLibrary" />
+    <AssociationSet Name="FK__UserLibra__PRODU__03F0984C" Association="AppArcadeModel.FK__UserLibra__PRODU__03F0984C">
+      <End Role="Product_info" EntitySet="Product_info" />
+      <End Role="UserLibrary" EntitySet="UserLibraries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserLibra__USERI__02FC7413" Association="AppArcadeModel.FK__UserLibra__USERI__02FC7413">
+      <End Role="user_info" EntitySet="user_info" />
+      <End Role="UserLibrary" EntitySet="UserLibraries" />
+    </AssociationSet>
+    <EntitySet Name="Chats" EntityType="AppArcadeModel.Chat" />
+    <AssociationSet Name="FK__Chat__UserId__160F4887" Association="AppArcadeModel.FK__Chat__UserId__160F4887">
+      <End Role="user_info" EntitySet="user_info" />
+      <End Role="Chat" EntitySet="Chats" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="admin_info">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AdminPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AdminEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Product_info">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Product_Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Product_Category" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Product_Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserLibraries" Relationship="AppArcadeModel.FK__UserLibra__PRODU__03F0984C" FromRole="Product_info" ToRole="UserLibrary" />
+  </EntityType>
+  <EntityType Name="UserLibrary">
+    <Key>
+      <PropertyRef Name="LibraryId" />
+    </Key>
+    <Property Name="LibraryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERID" Type="Int32" />
+    <Property Name="PRODUCTID" Type="Int32" />
+    <Property Name="PDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Product_info" Relationship="AppArcadeModel.FK__UserLibra__PRODU__03F0984C" FromRole="UserLibrary" ToRole="Product_info" />
+    <NavigationProperty Name="user_info" Relationship="AppArcadeModel.FK__UserLibra__USERI__02FC7413" FromRole="UserLibrary" ToRole="user_info" />
+  </EntityType>
+  <Association Name="FK__UserLibra__PRODU__03F0984C">
+    <End Type="AppArcadeModel.Product_info" Role="Product_info" Multiplicity="0..1" />
+    <End Type="AppArcadeModel.UserLibrary" Role="UserLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_info">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="UserLibrary">
+        <PropertyRef Name="PRODUCTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserLibra__USERI__02FC7413">
+    <End Type="AppArcadeModel.user_info" Role="user_info" Multiplicity="0..1" />
+    <End Type="AppArcadeModel.UserLibrary" Role="UserLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_info">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserLibrary">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="ChatId" />
+    </Key>
+    <Property Name="ChatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="user_info" Relationship="AppArcadeModel.FK__Chat__UserId__160F4887" FromRole="Chat" ToRole="user_info" />
+  </EntityType>
+  <Association Name="FK__Chat__UserId__160F4887">
+    <End Type="AppArcadeModel.user_info" Role="user_info" Multiplicity="0..1" />
+    <End Type="AppArcadeModel.Chat" Role="Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_info">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

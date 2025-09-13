@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title> Contact Us</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body>
+    <section class="Contact" style="position:relative; min-height:80vh; padding: 50px 90px; display:flex; justify-content:center; align-items:center; flex-direction:column">
+        <div class="Content" style=" max-width: 800px; text-align:center">
+            <h2 style="font-size: 36px; font-weight:500; color:#000000">Contact Us</h2>
+            <p style="font-size: 20px; font-weight:350; color:brown">
+                Need to get in touch with us? Either fill out the form with your inquiry
+                or find the email you'd like to contact below
+            </p>
+        </div>
+        <div class="container" style="width:100%; display:flex; justify-content:center; align-items:center; margin-top:35px">
+            <div class="ContactInfo" style="width: 50%; display:flex; flex-direction:column">
+                <div class="Box" style="position:relative;padding:20px 0;display:flex">
+
+                    <div class="Icon"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><i class="fa fa-envelope"></i></div>
+                    <div class="text" style="display:flex; margin-left:18px; font-size:16px; flex-direction:column; font-weight:300">
+
+                        <h3 style="font-weight:500; color:darkblue">Address</h3>
+                        <p style="font-size:16px; font-weight:500">Love Road <br>Tejgaon I/A <br>Dhaka 1208</p>
+                    </div>
+                </div>
+                <div class="Box" style="position:relative;padding:20px 0;display:flex">
+
+                    <div class="Icon"> <link href='https://unpkg.com/css.gg@2.0.0/icons/css/phone.css' rel='stylesheet'><i class="gg-phone"></i> </div>
+                    <div class="text" style="display:flex; margin-left:20px; font-size:16px; flex-direction:column; font-weight:300">
+
+                        <h3 style="font-weight:500; color:darkblue">Phone</h3>
+                        <p style="font-size:16px; font-weight:500">01631452320</p>
+                    </div>
+                </div>
+                <div class="Box" style="position:relative;padding:20px 0;display:flex">
+
+                    <div class="Icon"> <link href='https://unpkg.com/css.gg@2.0.0/icons/css/mail.css' rel='stylesheet'> <i class="gg-mail"></i> </div>
+                    <div class="text" style="display:flex; margin-left:20px; font-size:16px; flex-direction:column; font-weight:300">
+
+                        <h3 style="font-weight:500; color:darkblue">E-mail</h3>
+                        <p style="font-size:16px; font-weight:500">shiful.cse.20200204025@aust.edu</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ContactFrom" style="width:50%; padding:50px; background:#f9f7f4">
+
+                <h2 style="font-size: 32px; color:#333; font-weight: 550"> Send Message</h2>
+                <div class="inputBox" style="position:relative; width:100%; margin-top:20px ">
+                    <input style="width:100%; padding:5px 0; font-size:16px; margin:10px 0; border:none; border-bottom :2px solid #333; outline:none ; resize:none " type="text" name="" required="required" />
+                    <span style="transform:translatey(-25px);  position:absolute; left:0; padding: 5px 0; font-size:16px; margin: 10px 0; pointer-events:none; transition: 0.5s; color:#666; font-weight:400">Name</span>
+                </div>
+                <div class="inputBox" style="position:relative; width:100%; margin-top:10px ">
+                    <input style="width:100%; padding:5px 0; font-size:16px; margin:10px 0; border:none; border-bottom: 2px solid #333; outline:none ; resize:none " type="text" name="" required="required" />
+                    <span style="transform: translatey(-25px); position: absolute; left: 0; padding: 5px 0; font-size: 16px; margin: 10px 0; pointer-events: none; transition: 0.5s; color: #666; font-weight: 400">Email</span>
+                </div>
+                <div class="inputBox" style="position:relative; width:100%; margin-top:10px">
+                    <textarea style="width:100%;  padding:5px 0; font-size:16px; margin:12px 0; border:none; border-bottom: 2px solid #333; outline:none; resize:none " required="required"></textarea>
+                    <span style="transform:translatey(-25px); position: absolute; left: 0; padding: 5px 0; font-size: 16px; margin: 10px 0; pointer-events: none; transition: 0.5s; color: #666; font-weight: 400">Type your message.....</span>
+                </div>
+                <div class="inputBox" style="position:relative; width:80%; margin-top:20px; padding:12px ">
+                    <input style="width:100px; background:#00bcd4; color:#fff; border:none; cursor:pointer; padding:10px " type="submit" name="" value="Send" />
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

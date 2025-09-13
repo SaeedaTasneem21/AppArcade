@@ -1,0 +1,172 @@
+﻿@model IEnumerable<AppArcade.Models.user_info>
+
+@{
+    ViewBag.Title = "Admin Panel";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            padding-bottom: 2%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .first-row {
+            background-color: #070606;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .action-links {
+            text-align: center;
+        }
+
+            .action-links a {
+                margin: 0 5px;
+                text-decoration: none;
+                color: #007bff;
+            }
+
+                .action-links a:hover {
+                    text-decoration: underline;
+                }
+
+        .btn-group {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        .btn-outline-primary {
+            color: #007bff;
+            border: 1px solid #007bff;
+            background-color: transparent;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+        .btn-outline-success {
+            color: #28a745;
+            border: 1px solid #28a745;
+            background-color: transparent;
+        }
+
+            .btn-outline-success:hover {
+                background-color: #28a745;
+                color: #fff;
+            }
+    </style>
+</head>
+
+
+
+<body>
+    <h1 style="padding-bottom:2%">Admin Panel</h1>
+    <table class="table">
+        <tr class="first-row">
+
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserPassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.UserId }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @*<div class="row">
+        <div class="col">
+            <p class="btn btn-outline-primary btn-sm">
+                @Html.ActionLink("Update Product", "Create", "Product_info")
+            </p>
+        </div>
+        <div class="col">
+                <p class="btn btn-outline-success btn-sm">
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+            </div>
+
+    </div>*@
+
+    <div class="btn-group">
+        <p>
+            @Html.ActionLink("Update Product", "Create", "Product_info", null, new { @class = "btn btn-outline-primary rounded-pill py-2 px-4 shadow= sm width:600px" })
+        </p>
+        @*<p class="btn btn-outline-success">
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    </div>
+
+</body>
+</html>

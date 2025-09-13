@@ -1,0 +1,126 @@
+﻿@model AppArcade.Models.user_info
+
+@{
+    ViewBag.Title = "Registration";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <style>
+
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .form-container {
+            max-width: 1000px;
+            max-inline-size: contain;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+        }
+
+        h4 {
+            font-family: 'Segoe UI';
+            font-size: 28px;
+            color: #000000;
+            margin-bottom: 20px;
+            margin-block: auto;
+        }
+
+        .form-image {
+            width: 480px;
+            margin-right: 10px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border: 2px solid #808080;
+            border-radius: 25px;
+            padding: 15px;
+            transition: border-color 0.3s ease;
+            width: 160%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        .btn-register {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 20px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-register:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-container">
+            <!-- Image -->
+            <img src="https://media.istockphoto.com/id/1305268276/vector/registration-abstract-concept-vector-illustration.jpg?s=612x612&w=0&k=20&c=nfvUbHjcNDVIPdWkaxGx0z0WZaAEuBK9SyG-aIqg2-0=" alt="Form Image" class="form-image">
+
+            <!-- Form -->
+            <div class="form-horizontal">
+                <h4 class="mb-4">Create an Account</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn btn-register" />
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

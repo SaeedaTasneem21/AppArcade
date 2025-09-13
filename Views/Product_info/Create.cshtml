@@ -1,0 +1,106 @@
+﻿@model AppArcade.Models.Product_info
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm(new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/premium-vector/wave-liquid-background-abstract-vibrant-poster-web-element_41901-2696.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .card-body {
+            background-color: rgb(224, 132, 102,0.4);
+        }
+
+        .form-control {
+            border: 2px solid #808080;
+            border-radius: 20px;
+            padding: 7px;
+            transition: border-color 0.3s ease;
+            width: calc(100% - 14px);
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #ff6a00;
+                box-shadow: none;
+            }
+    </style>
+
+    <div class="container" style="border-radius: 10px;">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card" style="background-color: rgba(255, 255, 255, 0.6);">
+                    <div class="card-body">
+                        <h4 class="card-title">Add Product</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group" style="margin-bottom: 15px">
+                            <p>Product Name</p>
+                            @Html.EditorFor(model => model.Product_Name, new { htmlAttributes = new { @class = "form-control" } })
+
+                            @Html.ValidationMessageFor(model => model.Product_Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            @Html.LabelFor(model => model.Product_Image)
+                            @Html.EditorFor(model => model.Product_Image, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Product_Image, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            @Html.LabelFor(model => model.Product_Price)
+                            @Html.EditorFor(model => model.Product_Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Product_Price, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            @Html.LabelFor(model => model.Product_Category)
+                            @Html.EditorFor(model => model.Product_Category, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Product_Category, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            @Html.LabelFor(model => model.Product_Description)
+                            @Html.EditorFor(model => model.Product_Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Product_Description, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            @Html.LabelFor(model => model.Product_Data)
+                            @Html.EditorFor(model => model.Product_Data, new { htmlAttributes = new { @class = "form-control" } })                            
+                            @Html.ValidationMessageFor(model => model.Product_Data, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-lg btn-block shadow-sm" style="border-radius: 25px; padding: 10px 10px; width: 100px; height: 50px; ">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center mt-2">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-primary rounded-pill py-2 px-4 shadow= sm" })
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

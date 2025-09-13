@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfb9d88943824332830a20078ce35df6" Name="Diagram1">
+        <EntityTypeShape EntityType="AppArcadeModel.user_info" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppArcadeModel.admin_info" Width="1.5" PointX="3.75" PointY="4.125" />
+        <EntityTypeShape EntityType="AppArcadeModel.Product_info" Width="1.5" PointX="6.625" PointY="0.75" />
+        <EntityTypeShape EntityType="AppArcadeModel.UserLibrary" Width="1.5" PointX="3.75" PointY="0.75" />
+        <AssociationConnector Association="AppArcadeModel.FK__UserLibra__PRODU__03F0984C" />
+        <AssociationConnector Association="AppArcadeModel.FK__UserLibra__USERI__02FC7413" />
+        <EntityTypeShape EntityType="AppArcadeModel.Chat" Width="1.5" PointX="0.75" PointY="4.125" />
+        <AssociationConnector Association="AppArcadeModel.FK__Chat__UserId__160F4887" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

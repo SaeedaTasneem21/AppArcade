@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AppArcade.Models.UserLibrary>
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Product_info.Product_Image)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_info.Product_Name)
+        </th>
+        <th>
+            <h6 style="font-weight:bold">Purchase Date</h6>
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.user_info.Username)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="@item.Product_info.Product_Image" style="width:50px; height:50px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product_info.Product_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PDate)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.user_info.Username)
+        </td>*@
+        <td>
+            <a href="@Url.Action("DownloadFile", new {@FilePath = item.Product_info.Product_Data})" download>Download</a>
+        </td>
+    </tr>
+}
+
+</table>

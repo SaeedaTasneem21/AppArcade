@@ -1,0 +1,50 @@
+﻿@model AppArcade.Models.Cart
+
+@{ 
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Item</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    @if (Session["cart"] != null)
+    {
+        foreach (var item in (List<AppArcade.Models.Cart>)Session["cart"])
+        {
+            <tr>
+                <td>
+                    <img src="@item.product.Product_Image" width="70" height="70" />
+                </td>
+                <td>@item.product.Product_Name</td>
+                <td class="text-center">$@item.product.Product_Price</td>
+                <td class="text-center"><a href="@Url.Action("RemoveFromCart", "Cart", new { @productid = item.product.Product_id })" class="btn btn-danger text-center">Remove</a></td>
+
+            </tr>
+
+
+        }
+    
+
+    <tr>
+
+        @{
+            List<AppArcade.Models.Cart> carts = (List<AppArcade.Models.Cart>)Session["cart"];
+            var total = (from data in carts select data.product.Product_Price).Sum();
+        }
+        <td style="font-weight:bold">Total Amount = @total</td>
+
+    </tr>
+    <tr>
+        <td>
+            @*<a href="@Url.Action("Checkout","UserLibraries", new {})" class="btn btn-success">Checkout</a>*@
+            <a href="@Url.Action("Payment", new {})" class="btn btn-success">Checkout</a>
+        </td>
+    
+    </tr>
+    }
+</table>
+

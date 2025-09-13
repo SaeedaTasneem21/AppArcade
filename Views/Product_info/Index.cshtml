@@ -1,0 +1,185 @@
+﻿@model IEnumerable<AppArcade.Models.Product_info>
+
+@{
+    ViewBag.Title = "APPS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-create {
+        margin-top: 15px;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: blink;
+        background-color: #3c2ff3;
+        padding: 10px ;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-create:hover {
+            background-color: #b0b6e9;
+        }
+
+    .search-container {
+        position: relative;
+        margin: 4%;
+    }
+
+    .search-form {
+        position:static;
+        top: 2px;
+        right: px;
+        margin-top: 10px;
+        z-index: 999;
+    }
+
+    .search-field {
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .input-group-append .search-button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .search-button {
+        padding: 10px 20px;
+        border-radius: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-left: -1px;
+    }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+
+    .card {
+        border: none;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+        width: 200px;
+        margin-bottom: 15px;
+        margin-top: 20px;
+    }
+
+    .card-body {
+        padding: 15px;
+        background-color: #f8f9fa;
+    }
+
+    .card-title {
+        font-weight: bold;
+        color: #212529;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-weight: bold;
+        color: #212529;
+        margin-bottom: 5px;
+    }
+
+    .product-price {
+        color: #8b4513;
+        margin-bottom: 5px;
+    }
+
+    .product-category {
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .btn-details {
+        margin-top: 10px;
+    }
+
+    body {
+        background-color: #f0ddcc;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col">
+        @if (Session["SessionId"] == null)
+        {
+            @*<p class="col-md-3 btn-sm btn-create" style="margin:5%">
+                @Html.ActionLink("Create New", "Create")
+            </p>*@
+            <div class="col ">
+                <a href="@Url.Action("Create", "Product_info")" class="btn-sm btn-create">Create New</a>
+            </div>
+        }
+    </div>
+<div class="col">
+    <div class="search-container">
+        <div class="search-form">
+            @using (Html.BeginForm("Index", "Product_info", FormMethod.Get))
+            {
+                <div class="input-group">
+                    @Html.TextBox("Searching", null, new { @class = "search-field", placeholder = "Search..." })
+                    <div class="input-group-append">
+                        <button type="submit" class="search-button">Search</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+@*@using (Html.BeginForm("Index", "Product_info", FormMethod.Get))
+{
+    @Html.TextBox("Searching")
+    <input type="submit" value="Search" style="margin:5%"/>
+}*@
+</div>
+</div>
+
+@if (Model.Count() == 0)
+{
+    <p>no match found</p>
+}
+else
+{
+    <section class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md col-sm-6 mb-4">
+                    <div class="card" style="width:200px; height:350px">
+                        <div class="img-fluid">
+                            <img src="@item.Product_Image" style="width:100%; height:200px" />
+                        </div>
+                        <div class="card-body" style="background-color:ghostwhite">
+
+                            <div>
+                                <h4 style="font-weight:bold">@item.Product_Name</h4>
+                                <h6 style="color:brown">@item.Product_Price BDT</h6>
+                                <h6>@item.Product_Category</h6>
+                                <button class="btn btn-outline-primary small">
+                                    @Html.ActionLink("Details", "Details", new { id = item.Product_id })
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            }
+        </div>
+    </section>
+}
+
+

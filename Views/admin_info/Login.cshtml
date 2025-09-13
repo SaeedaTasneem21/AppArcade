@@ -1,0 +1,114 @@
+﻿@model AppArcade.Models.admin_info
+
+@{
+    ViewBag.Title = "Admin_Login";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin Login</title>
+    <style>
+        body {
+            background-image: url('https://i.pinimg.com/736x/c7/39/83/c739830ada7ea71fefed868be577b57c.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif,'Segoe UI', Tahoma, Geneva, Verdana;
+            margin: 0;
+            padding: 0;
+            display: block;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: rgb(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .login-container h4 {
+                color: #333333;
+                font-weight: bold;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+
+            .login-container .form-group label {
+                color: #666666;
+                font-weight: bold;
+            }
+
+            .login-container .form-control {
+                border: 2px solid #E5CFF7;
+                border-radius: 25px;
+                padding: 20px;
+                transition: border-color 0.3s ease;
+                width: 100%;
+                box-sizing: border-box;
+                margin-bottom: 20px;
+            }
+
+            .login-container .btn-login {
+                background-color: rgb(0, 0, 0);
+                color: #fff;
+                border: none;
+                border-radius: 30px;
+                padding: 10px 10px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                width: 150px;
+                height: 50px;
+                margin: 0 auto;
+                display: block;
+            }
+
+                .login-container .btn-login:hover {
+                    background-color: #218838;
+                }
+
+            .login-container .text-danger {
+                color: #dc3545;
+                font-size: 14px;
+            }
+    </style>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <div class="login-container">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <h4>Admin Login</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdminEmail)
+                @Html.EditorFor(model => model.AdminEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your email" } })
+                @Html.ValidationMessageFor(model => model.AdminEmail, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdminPassword)
+                @Html.EditorFor(model => model.AdminPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your password", type = "password" } })
+                @Html.ValidationMessageFor(model => model.AdminPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-login">Login</button>
+            </div>
+        }
+    </div>
+
+</body>
+</html>

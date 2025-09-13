@@ -1,0 +1,335 @@
+﻿@model IEnumerable<AppArcade.Models.Product_info>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["SessionId"] == null)
+{
+    <style>
+
+        body {
+            background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F2e%2F8b%2F01%2F2e8b013bd630c641a88951f8182e27a6.jpg&f=1&nofb=1&ipt=159994a799b7b04f45b221175778998714b3b715186b22389230b5220b58bdd5&ipo=images);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            font-family: sans-serif;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .jumbotron {
+            text-align: center;
+            position: relative;
+        }
+
+            .jumbotron h1 {
+                font-size: 3rem;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            .jumbotron h5 {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+
+            .jumbotron h4 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+        .button {
+            display: inline-block;
+            border-radius: 25px;
+            background-color: #d55be3;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+            padding: 7px 30px;
+            margin: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .button span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+                .button:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+    
+    </style>
+
+    <div class="jumbotron">
+        <h1>Welcome to Our App Arcade!</h1>
+        <h5>Welcome to our platform where you can find a wide range of softwares and games for your needs.</h5>
+        <h5>Discover amazing software and games for all your needs.</h5>
+        <h4>Explore Our Online Store</h4>
+
+        <a href="@Url.Action("About", "Home")" class="button" style="margin-bottom:50%">
+            <span>About</span>
+        </a>
+        <a href="@Url.Action("Login", "user_info")" class="button">
+            <span>Login</span>
+        </a>
+    </div>
+
+}
+else
+{
+    <style>
+        body {
+            background-image: url(https://static.vecteezy.com/system/resources/previews/000/681/371/original/dark-purple-gradient-fluid-abstract-shapes-background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            font-family: sans-serif;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .search-container {
+            position: relative;
+            margin: 2%;
+        }
+
+        .search-form {
+            position: static;
+            top: 2px;
+            right: px;
+            margin-top: 10px;
+            z-index: 999;
+        }
+
+        .search-field {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            border-right: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .input-group-append .search-button {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: -1px;
+        }
+
+            .search-button:hover {
+                background-color: #0056b3;
+            }
+
+    </style>    
+}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+@if (Session["SessionId"] != null)
+{
+    <body style="background-color:aliceblue">
+        <h4>Welcome </h4>
+        @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group position-static" style="margin-left:100%">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Logout" class="btn btn-success" />
+                </div>
+            </div>
+        }
+        @*Search field*@
+
+
+        <div class="input-group position-static " style="margin-left:60%; width:100%;">
+            <div class="search-container">
+                <div class="search-form">
+                    @using (Html.BeginForm("Index", "Product_info", FormMethod.Get))
+                    {
+                        <div class="input-group">
+                            @Html.TextBox("Searching", null, new { @class = "search-field", placeholder = "Search..." })
+                            <div class="input-group-append">
+                                <button type="submit" class="search-button">Search</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            @*@using (Html.BeginForm("Index", "Product_info", FormMethod.Get))
+            {
+                @Html.TextBox("Searching")
+                <input type="submit" value="Search" />
+            }*@
+        </div>
+
+        <div class="row" style="background-color:#ed980081; padding:5%; border-radius:20px">
+            <div class="col col-md col-sm-6 mb-4">
+                @*Category*@
+                <div class="container position-static" style="margin-top:0px;margin-left:0%;margin-right:10%">
+                    <div class="row p-3">
+                        <div class="col-md col-sm-6 mb-4">
+                            <a href="@Url.Action("Index", "Product_info", new { category = "Games" })" class="btn btn-large" style="display: inline-block; width: 190px; height: 200px; background-image: url(https://img.freepik.com/free-vector/online-games-concept_52683-38701.jpg?fbclid=IwAR32Mp30aKe8yhQ3X--DLK_184Gl9owS2ReLCGTalKcIA_k_MqIPpaT2J-k); color:deepskyblue; text-align: center; vertical-align: middle; line-height: 190px; font-size: 20px; border-radius: 5px; text-decoration: none; font-weight: bolder ">
+                                Games
+                            </a>
+
+
+                        </div>
+                        <div class="col-md col-sm-6 mb-4">
+                            <a href="@Url.Action("Index", "Product_info", new { category = "Productivity" })" class="btn btn-large" style="display: inline-block; width: 190px; height: 200px; background-image: url(https://img.freepik.com/free-vector/businessman-working-clock-hand-businesswoman-with-laptop-productivity-efficiency-production-qualification-concept-white-background_335657-1703.jpg?fbclid=IwAR1sWPZjoGdmfvtTOqU834bDGyYQa45EAy4u0DyLyBu5SBISwY0Tyh1DSs4); background-size: cover; background-position: center; color: deepskyblue; text-align: center; vertical-align: middle; line-height: 190px; font-size: 20px; border-radius: 5px; text-decoration: none; font-weight: bolder ">
+                                Productivity
+                            </a>
+
+
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-md col-sm-6 mb-4 ">
+                            <a href="@Url.Action("Index", "Product_info", new { category = "Social-Media" })" class="btn btn-large" style="display: inline-block; width: 190px; height: 200px; background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fsocial-media-sign-and-symbol-icon-element-vector-id502689031%3Fk%3D6%26m%3D502689031%26s%3D612x612%26w%3D0%26h%3DF06mHoSOSdpNj1jLElPqzM_kZtC6nNNvKig94IEUfYQ%3D&f=1&nofb=1&ipt=a85a03c477cb295d5f71002dbcfb7b7674f67213328f52b2a1a886f528675718&ipo=images); background-size: cover; background-position: center; color: deepskyblue; text-align: center; vertical-align: middle; line-height: 190px; font-size: 20px; border-radius: 5px; text-decoration: none; font-weight: bolder ">
+                                Social Media
+                            </a>
+
+
+                        </div>
+                        <div class="col-md col-sm-6 mb-4">
+                            <a href="@Url.Action("Index", "Product_info", new { category = "Utility" })" class="btn btn-large" style="display: inline-block; width: 190px; height: 200px; background-image: url(https://img.freepik.com/free-vector/appointment-booking-with-woman-smartphone_23-2148564096.jpg?size=338&ext=jpg&ga=GA1.1.386372595.1698105600&semt=ais&fbclid=IwAR2_GBPgRR51v1gs1mAdVaTFV-k1601JXneKSd736GgGoqTRr2z_brkQacE); background-size: cover; background-position: center; color: deepskyblue; text-align: center; vertical-align: middle; line-height: 190px; font-size: 20px; border-radius: 5px; text-decoration: none; font-weight: bolder ">
+                                Utility
+                            </a>
+
+
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-md col-sm-6 mb-4 ">
+                            <a href="@Url.Action("Index", "Product_info", new { category = "Entertainment" })" class="btn btn-large" style="display: inline-block; width: 190px; height: 200px; background-image: url(https://img.freepik.com/free-vector/happy-tiny-people-listening-spiritual-music_74855-5870.jpg?fbclid=IwAR2eyF77iYK3zYTkOyECIOF0gsTEYO9YAi9uPcoWHwAxjNg4LT861x7W_HU); background-size: cover; background-position: center; color: deepskyblue; text-align: center; vertical-align: middle; line-height: 190px; font-size: 20px; border-radius: 5px; text-decoration: none; font-weight: bolder ">
+                                Entertainment
+                            </a>
+
+
+                        </div>
+                        <div class="col-md col-sm-6 mb-4">
+                            <a href="@Url.Action("Index", "Product_info", new { category = "Educational" })" class="btn btn-large" style="display: inline-block; width: 190px; height: 200px; background-image: url(https://img.freepik.com/free-vector/students-with-laptops-studying-huge-laptop-with-graduation-cap-free-online-courses-online-certificate-courses-online-business-school-concept_335657-792.jpg?fbclid=IwAR3ReHy_o5LMcDY_FCLtQLOEeq6grhSYJuIg2Rd3F2TGmHpZNFfrofDWX3s); background-size: cover; background-position: center; color: deepskyblue; text-align: center; vertical-align: middle; line-height: 190px; font-size: 20px; border-radius: 5px; text-decoration: none; font-weight: bolder ">
+                                Educational
+                            </a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md col-sm-6 mb-4">
+                <div class="container">
+                    @*user-nav*@
+                    <div class="container position-static" style="margin-top:10%;margin-left:40%;width:fit-content">
+                        <div class="row p-3">
+                            <div class="col-md col-sm-6 mb-4" style="width:130px">
+                                <div class="card" style="border-radius:20px">
+                                    <a href="@Url.Action("User_Panel", "user_info")" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; background-color: lightgray; border-radius: 15px; padding: 15px; width: 110px; height: 130px; flex-direction: column;">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/user-avatars-2/300/10-1024.png" style="width: 80px; height: 80px; object-fit: cover; margin-bottom: 2px;" alt="User" />
+                                        <div style="font-weight: bold; font-size: smaller;">User</div>
+                                    </a>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md col-sm-6 mb-4" style="width:130px">
+                                <div class="card" style="border-radius:20px">
+                                    <a href="@Url.Action("Create", "Chats")" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; background-color: lightgray; border-radius: 15px; padding: 15px; width: 110px; height: 130px; flex-direction: column;">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/user-worker-employee-business-avatars/100/26-1User_34-1024.png" style="width: 80px; height: 80px; object-fit: cover; margin-bottom: 2px;" alt="User" />
+                                        <div style="font-weight: bold; font-size: smaller;">Support</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-md col-sm-6 mb-4" style="width:130px">
+                                <div class="card" style="border-radius:20px">
+                                    <a href="@Url.Action("Index", "Cart")" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; background-color: lightgray; border-radius: 15px; padding: 15px; width: 110px; height: 130px; flex-direction: column;">
+                                        <img src="https://webstockreview.net/images/shopping-cart-icon-png-7.png" style="width: 80px; height: 80px; object-fit: cover; margin-bottom: 2px;" alt="User" />
+                                        <div style="font-weight: bold; font-size: smaller;">Cart</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md col-sm-6 mb-4" style="width:130px">
+                                <div class="card" style="border-radius:20px">
+                                    <a href="@Url.Action("Index", "UserLibraries")" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; background-color: lightgray; border-radius: 15px; padding: 15px; width: 110px; height: 130px; flex-direction: column;">
+                                        <img src="https://icon-library.com/images/box-icon/box-icon-14.jpg" style="width: 80px; height: 80px; object-fit: cover; margin-bottom: 2px;" alt="User" />
+                                        <div style="font-weight: bold; font-size: smaller;">UserLibrary</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*App view*@
+                    <div class="container position-static" style="margin-top:2%; margin-left:20%;background-color:lightcyan;width:fit-content;border-radius:30px">
+                        @{
+                            var random = new Random();
+                            var shuffle = Model.OrderBy(x => random.Next()).ToList();
+                        }
+                        <section class="container" style="padding-top:4%">
+                            <div class="row">
+                                @foreach (var item in shuffle.Take(6))
+                                {
+                                    <div class="col-sm col-sm-4 mb-4">
+                                        <div class="img-fluid">
+                                            <img src="@item.Product_Image" style="width:70%; height:90px" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="background-color:burlywood;padding:5%;border-radius:20px; margin-top:4%">
+            <div class="container-fluid" style="overflow-x:auto; background-color:bisque;height:600px;display:flex">
+                <iframe src="https://play.famobi.com/wrapper/cannon-balls-3d/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+                <iframe src="https://play.famobi.com/wrapper/tower-crash-3d/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+                <iframe src="https://play.famobi.com/wrapper/8-ball-billiards-classic/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+                <iframe src="https://play.famobi.com/wrapper/table-tennis-world-tour/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+                <iframe src="https://play.famobi.com/wrapper/solitaire-klondike/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+                <iframe src="https://play.famobi.com/wrapper/cut-the-rope/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+                <iframe src="https://play.famobi.com/wrapper/archery-world-tour/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+                <iframe src="https://play.famobi.com/wrapper/totemia-cursed-marbles/A1000-10" style="width: max-content; height: 600px; padding: 2%" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+}

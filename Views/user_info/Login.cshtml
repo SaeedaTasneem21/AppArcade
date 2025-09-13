@@ -1,0 +1,131 @@
+﻿@model AppArcade.Models.user_info
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>    
+    <style>
+        body {
+            background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F000%2F190%2F741%2Foriginal%2Fultra-violet-galactic-background-free-vector.jpg&f=1&nofb=1&ipt=692dd4f9893e202da75be85cd3ea98cc284a4aab659b19950e6f4a55e4b88cd5&ipo=images);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif,'Segoe UI', Tahoma, Geneva, Verdana;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .login-container h4 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: black;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+        }
+
+        .form-group label {
+            color: black;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .form-control {
+            border: 2px solid #E5CFF7;
+            border-radius: 25px;
+            padding: 15px;
+            transition: border-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+
+            .form-control:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: none;
+            }
+
+        .btn-login {
+            background-color: #687EFF;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 150px;
+            height: 40px;
+            margin: 0 auto;
+            display: block;
+        }
+
+
+            .btn-login:hover {
+                background-color: #E5CFF7;
+            }
+
+        .login-container .text-danger {
+            color: #dc3545;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <div class="container">
+        <div class="login-container">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <h4>Login</h4>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserPassword)
+                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your password", type = "password" } })
+                    @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-login btn-block">Login</button>
+                </div>
+
+            }
+        </div>
+    </div>
+    
+</body>
+</html>

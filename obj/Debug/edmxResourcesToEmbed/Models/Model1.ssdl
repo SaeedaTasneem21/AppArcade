@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AppArcadeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admin_info">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdminPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AdminEmail" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="ChatId" />
+    </Key>
+    <Property Name="ChatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product_info">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product_Image" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Product_Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Product_Category" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Product_Description" Type="nvarchar(max)" />
+    <Property Name="Product_Data" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="user_info">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserLibrary">
+    <Key>
+      <PropertyRef Name="LibraryId" />
+    </Key>
+    <Property Name="LibraryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERID" Type="int" />
+    <Property Name="PRODUCTID" Type="int" />
+    <Property Name="PDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Chat__UserId__160F4887">
+    <End Role="user_info" Type="Self.user_info" Multiplicity="0..1" />
+    <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_info">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserLibra__PRODU__03F0984C">
+    <End Role="Product_info" Type="Self.Product_info" Multiplicity="0..1" />
+    <End Role="UserLibrary" Type="Self.UserLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_info">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="UserLibrary">
+        <PropertyRef Name="PRODUCTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserLibra__USERI__02FC7413">
+    <End Role="user_info" Type="Self.user_info" Multiplicity="0..1" />
+    <End Role="UserLibrary" Type="Self.UserLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_info">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserLibrary">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AppArcadeModelStoreContainer">
+    <EntitySet Name="admin_info" EntityType="Self.admin_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_info" EntityType="Self.Product_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_info" EntityType="Self.user_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLibrary" EntityType="Self.UserLibrary" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Chat__UserId__160F4887" Association="Self.FK__Chat__UserId__160F4887">
+      <End Role="user_info" EntitySet="user_info" />
+      <End Role="Chat" EntitySet="Chat" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserLibra__PRODU__03F0984C" Association="Self.FK__UserLibra__PRODU__03F0984C">
+      <End Role="Product_info" EntitySet="Product_info" />
+      <End Role="UserLibrary" EntitySet="UserLibrary" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserLibra__USERI__02FC7413" Association="Self.FK__UserLibra__USERI__02FC7413">
+      <End Role="user_info" EntitySet="user_info" />
+      <End Role="UserLibrary" EntitySet="UserLibrary" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

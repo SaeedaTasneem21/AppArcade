@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AppArcade.Models.admin_info>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["ASessionId"] == null)
+{
+    /*<p>@Html.ActionLink("Login", "Login", "user_info")</p>*/
+    <h4>Session Expired</h4>
+    <p>Please Login</p>
+}
+else
+{
+    <div class="welcome-header">
+        <h2>Welcome, @Session["ASessionId"]!</h2>
+        @using (Html.BeginForm("ALogout", "Home", FormMethod.Post, new { @class = "logout-form" }))
+        {
+            <input type="submit" value="Logout" class="btn btn-success" />
+        }
+    </div>   
+}
+
+@if (Session["ASessionId"] != null)
+{  
+    <table class="table table-striped table-bordered" style="margin-top:5%">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th>Admin Name</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdminName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdminPassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdminEmail)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AdminId }, new {@class = "btn btn-info"}) @*|
+                    @Html.ActionLink("Details", "Details", new { id = item.AdminId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.AdminId })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="col-sm-3" style="width:130px;margin-top:20%; margin-bottom:15%">
+        <div class="card" style="border-radius:20px">
+            <a href="@Url.Action("Create", "Chats")" style="text-decoration:none" />
+            <button class="card-body" type="button" style="background-color: #fea8a8; border-radius: 20px">
+                <img src="https://cdn1.iconfinder.com/data/icons/user-worker-employee-business-avatars/100/26-1User_34-1024.png" class="card-img-top" />
+                <h5 class="card-title" style="font-weight:bold;font-size:small">support</h5>
+            </button>
+        </div>
+    </div>    
+}
+
+<style>
+    .welcome-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #debebe;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+        .welcome-header h2 {
+            font-size: 24px;
+            font-family: 'Segoe UI';
+            font-weight: bold;
+        }
+
+    .logout-form {
+        margin: 0;
+    }
+</style>
